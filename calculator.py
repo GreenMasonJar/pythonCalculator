@@ -5,12 +5,21 @@ inputText = ""
 
 #Adds to inputText string
 def addToCalculation(symbol):
-    pass
+    global inputText
+    inputText += symbol
+    
+    e.delete(0, END)
+    e.insert(0, inputText)
 
 #converts string to calculation and does the math. Algebraic!
 #shows error if math is not mathing
-def evalCalc(inputText):
-    pass
+def evalCalc():
+    global inputText 
+    answer = eval(inputText)
+
+
+    e.delete(0,END)
+    e.insert(0, answer)
 
 #When you hit the CA (Clear All) button it clears the calculator 
 def clearField():
@@ -20,33 +29,62 @@ def clearField():
 def deleteButton():
     pass
 
-
-
 #GUI through Tkinter
 root = Tk()
-root.geometry("1000x1000")
+root.geometry("500x500")
 root.title("Calculator")
 
-#Creating grid of number buttons (sans 0)
-rowIndex = 0
-columnIndex = 0
-for i in range(1, 10):
-    if columnIndex > 2:
-        columnIndex = 0
-        rowIndex += 1
-    button = Button(root, text=i)
-    button.grid(row=rowIndex, column=columnIndex)
-    columnIndex+=1
+e = Entry(root)
+e.grid(row = 0, column = 0, columnspan = 3)
 
-#creating special buttons AND 0 number
-special = ["(", "0", ")", "C", "CA", "="]
-for i in special:
-    if columnIndex > 2:
-        columnIndex = 0
-        rowIndex += 1
+#Creating buttons
+button1 = Button(root, text="1", command=lambda: addToCalculation("1"))
+button2 = Button(root, text="2", command=lambda: addToCalculation("2"))
+button3 = Button(root, text="3", command=lambda: addToCalculation("3"))
+button4 = Button(root, text="4", command=lambda: addToCalculation("4"))
+button5 = Button(root, text="5", command=lambda: addToCalculation("5"))
+button6 = Button(root, text="6", command=lambda: addToCalculation("6"))
+button7 = Button(root, text="7", command=lambda: addToCalculation("7"))
+button8 = Button(root, text="8", command=lambda: addToCalculation("8"))
+button9 = Button(root, text="9", command=lambda: addToCalculation("9"))
+button0 = Button(root, text="0", command=lambda: addToCalculation("0"))
+buttonStarPer = Button(root, text="(", command=lambda: addToCalculation("("))
+buttonEndPer = Button(root, text=")", command=lambda: addToCalculation(")"))
+buttonPlus = Button(root, text="+", command=lambda: addToCalculation("+"))
+buttonMinus = Button(root, text="-", command=lambda: addToCalculation("-"))
+buttonMult = Button(root, text="*", command=lambda: addToCalculation("*"))
+buttonDiv = Button(root, text="/", command=lambda: addToCalculation("/"))
 
-    specialButton = Button(root, text=i)
-    specialButton.grid(row = rowIndex, column=columnIndex)
-    columnIndex+=1
+buttonCA = Button(root, text="CA", command=clearField)
+buttonC = Button(root, text="C", command=deleteButton)
+buttonEqual = Button(root, text="=", command=evalCalc)
 
+
+
+button1.grid(row = 1, column = 0)
+button2.grid(row = 1, column = 1)
+button3.grid(row = 1, column = 2)
+button4.grid(row = 2, column = 0)
+button5.grid(row = 2, column = 1)
+button6.grid(row = 2, column = 2)
+button7.grid(row = 3, column = 0)
+button8.grid(row = 3, column = 1)
+button9.grid(row = 3, column = 2)
+button0.grid(row = 4, column = 1)
+buttonStarPer.grid(row = 4, column = 0)
+buttonEndPer.grid(row = 4, column = 2)
+buttonCA.grid(row = 5, column = 0)
+buttonC.grid(row = 5, column = 1)
+buttonEqual.grid(row = 5, column = 2) 
+buttonPlus.grid(row = 1, column = 3)
+buttonMinus.grid(row = 2, column = 3)
+buttonMult.grid(row = 3, column = 3)
+buttonDiv.grid(row = 4, column = 3)
+
+
+
+
+#C button
+#CA button
+#= button (2 as long...)
 root.mainloop()
