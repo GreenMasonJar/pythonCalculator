@@ -14,20 +14,34 @@ def addToCalculation(symbol):
 #converts string to calculation and does the math. Algebraic!
 #shows error if math is not mathing
 def evalCalc():
-    global inputText 
-    answer = eval(inputText)
+    try:
+        global inputText 
+        inputText = str(eval(inputText))
+        
+        e.delete(0,END)
+        e.insert(0, inputText)
 
-
-    e.delete(0,END)
-    e.insert(0, answer)
+    except:
+        e.delete(0, END)
+        e.insert(0, "ERROR")
 
 #When you hit the CA (Clear All) button it clears the calculator 
 def clearField():
-    pass
+    global inputText
+    inputText = ""
+    e.delete(0, END)
 
 #has a clear/delete button to delete one space
 def deleteButton():
-    pass
+    global inputText
+    inputText = inputText[: -1]
+
+    e.delete(0,END)
+    e.insert(0, inputText)
+
+
+
+
 
 #GUI through Tkinter
 root = Tk()
@@ -59,8 +73,7 @@ buttonCA = Button(root, text="CA", command=clearField)
 buttonC = Button(root, text="C", command=deleteButton)
 buttonEqual = Button(root, text="=", command=evalCalc)
 
-
-
+#Organizing the buttons into a grid
 button1.grid(row = 1, column = 0)
 button2.grid(row = 1, column = 1)
 button3.grid(row = 1, column = 2)
@@ -81,10 +94,4 @@ buttonMinus.grid(row = 2, column = 3)
 buttonMult.grid(row = 3, column = 3)
 buttonDiv.grid(row = 4, column = 3)
 
-
-
-
-#C button
-#CA button
-#= button (2 as long...)
 root.mainloop()
